@@ -21,8 +21,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var myApi: MyApi
-
     private lateinit var lang:String
+    private lateinit var units:String
     private val myKey= OpenWeatherKey //openweather api key
     var disposable: Disposable? = null
 
@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         lang = "kr"
+        units = "metric"
         val retrofit = Retrofit.Builder()
                 .baseUrl("https://api.openweathermap.org")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun myWeather(view: View){
-        disposable = myApi.getWeather((view as Button).text as String,myKey,  lang)
+        disposable = myApi.getWeather((view as Button).text as String,myKey, lang, units)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
