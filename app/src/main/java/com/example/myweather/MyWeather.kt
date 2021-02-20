@@ -6,6 +6,7 @@ class MyWeather{
 }
 class Weather {
     var description:String = ""
+    var icon:String = ""
 }
 class Main {
     var temp:Double = 0.0

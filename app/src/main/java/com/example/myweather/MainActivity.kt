@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myweather.BuildConfig.OpenWeatherKey
 import com.example.myweather.databinding.ActivityMainBinding
+import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -48,6 +49,8 @@ class MainActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { result ->
+                            var icon:String = "https://openweathermap.org/img/wn/${result.weather?.get(0)?.icon}@2x.png"
+                            Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(binding.imageView);
                             binding.textView1.setText("도시 : ${(view).text}")
                             binding.textView2.setText("날씨 : ${result.weather?.get(0)?.description}")
                             binding.textView3.setText("온도 : ${result.main?.temp}")
