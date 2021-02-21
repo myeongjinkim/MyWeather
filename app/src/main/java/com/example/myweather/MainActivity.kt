@@ -22,6 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var myApi: MyApi
+    private var lat:Double = 0.0
+    private var lon:Double = 0.0
     private lateinit var lang:String
     private lateinit var units:String
     private val myKey= OpenWeatherKey //openweather api key
@@ -44,19 +46,27 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun myWeather(view: View){
-        disposable = myApi.getWeather((view as Button).text as String,myKey, lang, units)
+        if((view as Button).text.equals("Seoul")){
+            lat=37.56667;
+            lon=126.97806;
+        }else if((view).text.equals("Incheon")){
+            lat=37.45639;
+            lon=126.70528;
+        }else if((view).text.equals("Busan")){
+            lat=35.17944;
+            lon=129.07556;
+        }
+        disposable = myApi.getWeather(lat, lon, myKey, lang, units)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { result ->
-                            var icon:String = "https://openweathermap.org/img/wn/${result.weather?.get(0)?.icon}@2x.png"
+                            var icon:String = "https://openweathermap.org/img/wn/${result.current.weather?.get(0)?.icon}@2x.png"
                             Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(binding.imageView);
-                            binding.textView1.setText("도시 : ${(view).text}")
-                            binding.textView2.setText("날씨 : ${result.weather?.get(0)?.description}")
-                            binding.textView3.setText("온도 : ${result.main?.temp}")
-                            binding.textView4.setText("체감 온도 : ${result.main?.feels_like}")
-                            binding.textView5.setText("최저 온도 : ${result.main?.temp_min}")
-                            binding.textView6.setText("최고 온도 : ${result.main?.temp_max}")
+                            binding.textView1.setText("도시 : ${view.text}")
+                            binding.textView2.setText("날씨 : ${result.current.weather?.get(0)?.description}")
+                            binding.textView3.setText("온도 : ${result.current?.temp}")
+                            binding.textView4.setText("체감 온도 : ${result.current?.feels_like}")
                         },
                         { error -> Log.d("Error Msg:", error.message.toString()) }
                 )

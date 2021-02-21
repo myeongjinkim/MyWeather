@@ -1,16 +1,14 @@
 package com.example.myweather
 
 class MyWeather{
+    lateinit var current:WeatherInfo
+}
+class WeatherInfo{
+    var temp:Double = 0.0
+    var feels_like:Double = 0.0
     lateinit var weather:List<Weather>
-    lateinit var main:Main
 }
 class Weather {
     var description:String = ""
     var icon:String = ""
-}
-class Main {
-    var temp:Double = 0.0
-    var feels_like:Double = 0.0
-    var temp_min:Double = 0.0
-    var temp_max:Double = 0.0
 }
