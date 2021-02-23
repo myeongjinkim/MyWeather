@@ -11,9 +11,14 @@ import kotlinx.coroutines.launch
 
 class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {
     private var _weatherInfoRepositoryModel = MutableLiveData<WeatherInfoRepositoryModel>()
+    var lat:Double = 0.0
+    var lon:Double = 0.0
+    private val myKey= BuildConfig.OpenWeatherKey //openweather api key
+    private var lang = "kr"
+    private var units = "metric"
     var weatherRepositories = _weatherInfoRepositoryModel
 
-    fun requestWeatherRepositories(lat:Double, lon:Double, myKey:String, lang:String, units:String) {
+    fun requestWeatherRepositories() {
         CoroutineScope(Dispatchers.IO).launch {
             Log.d("Error Msg:", "${lat} ${lon} ${myKey} ${lang} ${units}")
             weatherRepository.getRepositories(lat, lon, myKey, lang, units)
