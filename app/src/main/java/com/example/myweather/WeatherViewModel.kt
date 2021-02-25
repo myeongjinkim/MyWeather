@@ -18,18 +18,17 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
     private var units = "metric"
     var weatherRepositories = _weatherInfoRepositoryModel
 
-    fun requestWeatherRepositories() {
+    fun requestWeatherRepositories(lat:Double,lon:Double) {
         CoroutineScope(Dispatchers.IO).launch {
-            Log.d("Error Msg:", "${lat} ${lon} ${myKey} ${lang} ${units}")
             weatherRepository.getRepositories(lat, lon, myKey, lang, units)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { result ->
-                        Log.d("Error Msg:", "gdgd")
+                        Log.d("vm Msg:", "gdgd")
                             _weatherInfoRepositoryModel.postValue(result.current)
                     },
-                    { error -> Log.d("Error Msg:", error.message.toString()) }
+                    { error -> Log.d("Error Msg????:", error.message.toString()) }
                 )
         }
     }
