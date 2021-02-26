@@ -58,7 +58,7 @@ class SettingActivity: AppCompatActivity() {
             var city = view.text as String
             if(db.cityDao().load(city)!=null){
                 for(myCity in db.cityDao().getAll()){
-                    db.cityDao().delete(myCity)
+                    db.cityDao().deleteAll()
                 }
             }
             Log.d("sa Msg :", "${city}")

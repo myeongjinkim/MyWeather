@@ -36,23 +36,15 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar);
 
-        initWeatherViewModel()
+        CoroutineScope(Dispatchers.IO).launch {
+            initWeatherViewModel()
+        }
 
     }
 
     override fun onStart() {
         super.onStart()
-        CoroutineScope(Dispatchers.IO).launch {
-            db = Room.databaseBuilder(
-                    applicationContext,
-                    CityDatabase::class.java, "city"
-            ).build()
-            myCity = db.cityDao().getAll()
-            city = myCity[0].city_name
-            Log.d("ma Msg ","${myCity[0].city_name}")
-            weatherViewModel.requestWeatherRepositories(myCity[0].lat, myCity[0].lon)
-
-        }
+        weatherViewModel.requestWeatherRepositories()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -98,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateRepositories(repos: WeatherInfoRepositoryModel) {
         var icon = "https://openweathermap.org/img/wn/${repos.weather.get(0).icon}@2x.png"
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(binding.imageView);
-        binding.textView1.setText("도시 : ${city}")
+        binding.textView1.setText("도시 : ${weatherViewModel.getCity_name()}")
         binding.textView2.setText("날씨 : ${repos.weather.get(0)?.description}")
         binding.textView3.setText("온도 : ${repos.temp}")
         binding.textView4.setText("체감 온도 : ${repos.feels_like}")
