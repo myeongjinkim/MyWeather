@@ -26,7 +26,7 @@ class SettingActivity: AppCompatActivity() {
 
         db = Room.databaseBuilder(
             applicationContext,
-            CityDatabase::class.java, "city"
+            CityDatabase::class.java, "cityData-db"
         ).build()
     }
 
@@ -56,12 +56,9 @@ class SettingActivity: AppCompatActivity() {
                 lon = 129.07556
             }
             var city = view.text as String
-            if(db.cityDao().load(city)!=null){
-                for(myCity in db.cityDao().getAll()){
-                    db.cityDao().deleteAll()
-                }
+            if(db.cityDao().getAll()!=null){
+                db.cityDao().deleteAll()
             }
-            Log.d("sa Msg :", "${city}")
             db.cityDao().insert(
                     City(
                             city_name = city,
@@ -69,6 +66,7 @@ class SettingActivity: AppCompatActivity() {
                             lon = lon
                     )
             )
+            Log.d("sa Msg :", "${db.cityDao().getAll()[0].city_name}")
         }
     }
 }

@@ -22,12 +22,8 @@ class MainActivity : AppCompatActivity() {
     private var pressedTime: Long = 0
     private val finishIntervalTime: Long = 2000
     private lateinit var binding: ActivityMainBinding
-    private lateinit var city:String
-    private lateinit var weatherViewModel: WeatherViewModel
-    private lateinit var weatherViewModelFactory: WeatherViewModelFactory
 
-    private lateinit var db:CityDatabase
-    private lateinit var myCity: List<City>
+    private lateinit var weatherViewModel: WeatherViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar);
 
-        CoroutineScope(Dispatchers.IO).launch {
-            initWeatherViewModel()
-        }
+        initWeatherViewModel()
 
     }
 
@@ -80,7 +74,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initWeatherViewModel() {
-        weatherViewModelFactory = WeatherViewModelFactory(WeatherRepository())
+        var weatherViewModelFactory = WeatherViewModelFactory(WeatherRepository(application))
         weatherViewModel = ViewModelProvider(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
         weatherViewModel.weatherRepositories.observe(this) {
             updateRepositories(it)
@@ -96,18 +90,4 @@ class MainActivity : AppCompatActivity() {
         binding.textView4.setText("체감 온도 : ${repos.feels_like}")
     }
 
-//    fun myWeather(view: View) {
-//        if ((view as Button).text.equals("Seoul")) {
-//            weatherViewModel.lat = 37.56667
-//            weatherViewModel.lon = 126.97806
-//        } else if ((view).text.equals("Incheon")) {
-//            weatherViewModel.lat = 37.45639
-//            weatherViewModel.lon = 126.70528
-//        } else if ((view).text.equals("Busan")) {
-//            weatherViewModel.lat = 35.17944
-//            weatherViewModel.lon = 129.07556
-//        }
-//        city = view.text as String
-//        weatherViewModel.requestWeatherRepositories()
-//    }
 }
