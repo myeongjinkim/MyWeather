@@ -1,4 +1,4 @@
-package com.example.myweather
+package com.example.myweather.data.local
 
 import androidx.room.*
 

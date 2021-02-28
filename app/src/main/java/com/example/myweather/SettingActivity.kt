@@ -9,6 +9,8 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.example.myweather.databinding.ActivitySettingBinding
+import com.example.myweather.data.local.City
+import com.example.myweather.data.local.CityDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

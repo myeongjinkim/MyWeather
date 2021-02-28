@@ -1,4 +1,4 @@
-package com.example.myweather
+package com.example.myweather.data.remote
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

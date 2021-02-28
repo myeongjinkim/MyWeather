@@ -2,20 +2,17 @@ package com.example.myweather
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
 import com.example.myweather.databinding.ActivityMainBinding
+import com.example.myweather.data.WeatherRepository
+import com.example.myweather.data.remote.MyWeatherCurrent
+import com.example.myweather.viewModel.WeatherViewModel
+import com.example.myweather.viewModel.WeatherViewModelFactory
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -70,12 +67,12 @@ class MainActivity : AppCompatActivity() {
     private fun initWeatherViewModel() {
         var weatherViewModelFactory = WeatherViewModelFactory(WeatherRepository(application))
         weatherViewModel = ViewModelProvider(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
-        weatherViewModel.weatherRepositories.observe(this) {
+        weatherViewModel.MyWeatherCurrent.observe(this) {
             updateRepositories(it)
         }
     }
 
-    private fun updateRepositories(repos: WeatherInfoRepositoryModel) {
+    private fun updateRepositories(repos: MyWeatherCurrent) {
         var icon = "https://openweathermap.org/img/wn/${repos.weather.get(0).icon}@2x.png"
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(binding.imageView);
         binding.textView1.setText("도시 : ${weatherViewModel.getCity_name()}")

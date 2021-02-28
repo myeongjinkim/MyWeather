@@ -1,10 +1,10 @@
-package com.example.myweather
+package com.example.myweather.data.remote
 
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MyApi {
+interface WeatherApi {
     @GET("/data/2.5/onecall")
     fun getWeather(
             @Query("lat") lat: Double,
@@ -12,6 +12,6 @@ interface MyApi {
             @Query("appid") key: String,
             @Query("lang") lang: String,
             @Query("units") units: String
-    ): Observable<MyWeatherRepositoryModel>
+    ): Observable<MyWeather>
 
 }
