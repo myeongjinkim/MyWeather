@@ -59,17 +59,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (pressedTime == 0L) {
-            Toast.makeText(this, " 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+        if (System.currentTimeMillis() > finishIntervalTime + pressedTime) {
             pressedTime = System.currentTimeMillis()
-        } else {
-            val secondPressTime: Long = System.currentTimeMillis() - pressedTime
-            if (secondPressTime > finishIntervalTime) {
-                Toast.makeText(this, " 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
-                pressedTime = 0
-            } else {
-                finish()
-            }
+            Toast.makeText(this, " 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+        }else{
+            finish();
         }
     }
 
