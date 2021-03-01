@@ -2,22 +2,23 @@ package com.example.myweather
 
 import android.R
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
+import androidx.lifecycle.ViewModelProvider
+import com.example.myweather.data.CityRepository
+import com.example.myweather.data.WeatherRepository
 import com.example.myweather.databinding.ActivitySettingBinding
-import com.example.myweather.data.local.City
-import com.example.myweather.data.local.CityDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.myweather.viewModel.SettingViewModel
+import com.example.myweather.viewModel.SettingViewModelFactory
+import com.example.myweather.viewModel.WeatherViewModel
+import com.example.myweather.viewModel.WeatherViewModelFactory
 
 class SettingActivity: AppCompatActivity() {
     private lateinit var binding: ActivitySettingBinding
-    private lateinit var db: CityDatabase
+    private lateinit var settingViewModel: SettingViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
@@ -26,10 +27,7 @@ class SettingActivity: AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
 
-        db = Room.databaseBuilder(
-            applicationContext,
-            CityDatabase::class.java, "cityData-db"
-        ).build()
+        initSettingViewModel()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -42,33 +40,13 @@ class SettingActivity: AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun myWeather(view: View) {
+    private fun initSettingViewModel() {
+        var settingViewModelFactory = SettingViewModelFactory(CityRepository(application))
+        settingViewModel = ViewModelProvider(this, settingViewModelFactory).get(SettingViewModel::class.java)
+    }
 
-        CoroutineScope(Dispatchers.IO).launch {
-            var lat:Double = 0.0
-            var lon:Double = 0.0
-            if ((view as Button).text.equals("Seoul")) {
-                lat = 37.56667
-                lon = 126.97806
-            } else if ((view).text.equals("Incheon")) {
-                lat = 37.45639
-                lon = 126.70528
-            } else if ((view).text.equals("Busan")) {
-                lat = 35.17944
-                lon = 129.07556
-            }
-            var city = view.text as String
-            if(db.cityDao().getAll()!=null){
-                db.cityDao().deleteAll()
-            }
-            db.cityDao().insert(
-                    City(
-                            city_name = city,
-                            lat = lat,
-                            lon = lon
-                    )
-            )
-            Log.d("sa Msg :", "${db.cityDao().getAll()[0].city_name}")
-        }
+    fun myWeather(view: View) {
+        settingViewModel.requestSettingRepository((view as Button).text as String)
+
     }
 }

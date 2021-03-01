@@ -68,11 +68,11 @@ class MainActivity : AppCompatActivity() {
         var weatherViewModelFactory = WeatherViewModelFactory(WeatherRepository(application))
         weatherViewModel = ViewModelProvider(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
         weatherViewModel.MyWeatherCurrent.observe(this) {
-            updateRepositories(it)
+            updateRepository(it)
         }
     }
 
-    private fun updateRepositories(repos: MyWeatherCurrent) {
+    private fun updateRepository(repos: MyWeatherCurrent) {
         var icon = "https://openweathermap.org/img/wn/${repos.weather.get(0).icon}@2x.png"
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(binding.imageView);
         binding.textView1.setText("도시 : ${weatherViewModel.getCity_name()}")
