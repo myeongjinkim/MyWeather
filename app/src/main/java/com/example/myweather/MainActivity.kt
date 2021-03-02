@@ -5,22 +5,21 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.myweather.databinding.ActivityMainBinding
-import com.example.myweather.data.WeatherRepository
 import com.example.myweather.data.remote.MyWeatherCurrent
+import com.example.myweather.databinding.ActivityMainBinding
 import com.example.myweather.viewModel.WeatherViewModel
-import com.example.myweather.viewModel.WeatherViewModelFactory
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var pressedTime: Long = 0
     private val finishIntervalTime: Long = 2000
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var weatherViewModel: WeatherViewModel
+    private val weatherViewModel: WeatherViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +64,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initWeatherViewModel() {
-        var weatherViewModelFactory = WeatherViewModelFactory(WeatherRepository(application))
-        weatherViewModel = ViewModelProvider(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
         weatherViewModel.MyWeatherCurrent.observe(this) {
             updateRepository(it)
         }

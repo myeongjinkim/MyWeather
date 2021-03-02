@@ -1,16 +1,23 @@
 package com.example.myweather.viewModel
 
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.myweather.data.CityRepository
 import com.example.myweather.data.local.City
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SettingViewModel(private val cityRepository: CityRepository) : ViewModel(){
+@HiltViewModel
+class SettingViewModel @Inject constructor(
+    private val cityRepository: CityRepository,
+    private val savedStateHandle: SavedStateHandle
+) : ViewModel(), LifecycleObserver {
 
     fun requestSettingRepository(city:String) {
-
         CoroutineScope(Dispatchers.IO).launch {
             var lat:Double = 0.0
             var lon:Double = 0.0

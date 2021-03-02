@@ -1,18 +1,27 @@
 package com.example.myweather.viewModel
 
 import android.util.Log
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.myweather.BuildConfig
+import com.example.myweather.data.CityRepository
 import com.example.myweather.data.WeatherRepository
 import com.example.myweather.data.remote.MyWeatherCurrent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {
+@HiltViewModel
+class WeatherViewModel @Inject constructor(
+    private var weatherRepository: WeatherRepository,
+    private val savedStateHandle: SavedStateHandle
+) : ViewModel(), LifecycleObserver {
     private var _MyWeatherCurrent = MutableLiveData<MyWeatherCurrent>()
     var MyWeatherCurrent = _MyWeatherCurrent
 

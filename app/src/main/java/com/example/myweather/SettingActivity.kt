@@ -5,19 +5,16 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.myweather.data.CityRepository
-import com.example.myweather.data.WeatherRepository
 import com.example.myweather.databinding.ActivitySettingBinding
 import com.example.myweather.viewModel.SettingViewModel
-import com.example.myweather.viewModel.SettingViewModelFactory
-import com.example.myweather.viewModel.WeatherViewModel
-import com.example.myweather.viewModel.WeatherViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingActivity: AppCompatActivity() {
     private lateinit var binding: ActivitySettingBinding
-    private lateinit var settingViewModel: SettingViewModel
+    private val settingViewModel: SettingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +24,6 @@ class SettingActivity: AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
 
-        initSettingViewModel()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -40,10 +36,6 @@ class SettingActivity: AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun initSettingViewModel() {
-        var settingViewModelFactory = SettingViewModelFactory(CityRepository(application))
-        settingViewModel = ViewModelProvider(this, settingViewModelFactory).get(SettingViewModel::class.java)
-    }
 
     fun myWeather(view: View) {
         settingViewModel.requestSettingRepository((view as Button).text as String)

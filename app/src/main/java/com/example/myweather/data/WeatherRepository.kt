@@ -1,19 +1,15 @@
 package com.example.myweather.data
 
-import android.app.Application
 import com.example.myweather.data.local.CityDao
-import com.example.myweather.data.local.CityDatabase
-import com.example.myweather.data.remote.WeatherService
+import com.example.myweather.data.remote.WeatherApi
+import javax.inject.Inject
 
-class WeatherRepository {   //suspend 한정자
+class WeatherRepository@Inject constructor(
+    private var cityDao: CityDao,
+    private var weatherApi: WeatherApi
+) {
 
-    private var cityDao: CityDao
-    constructor(application: Application) {
-        var cityDatabase = CityDatabase.getInstance(application)
-        cityDao = cityDatabase!!.cityDao()
-    }
     fun getCityLocalDataSource()= cityDao
+    fun getWeatherRemoteDataSource(lat:Double, lon:Double, myKey:String, lang:String, units:String) = weatherApi.getWeather(lat, lon, myKey, lang, units)
 
-    private var weatherClient = WeatherService.client
-    fun getWeatherRemoteDataSource(lat:Double, lon:Double, myKey:String, lang:String, units:String) = weatherClient.getWeather(lat, lon, myKey, lang, units)
 }
