@@ -3,6 +3,7 @@ package com.example.myweather.viewModel
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.myweather.data.CityRepository
 import com.example.myweather.data.local.City
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,12 +14,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingViewModel @Inject constructor(
-    private val cityRepository: CityRepository,
-    private val savedStateHandle: SavedStateHandle
-) : ViewModel(), LifecycleObserver {
+    private val cityRepository: CityRepository
+) : ViewModel(){
 
     fun requestSettingRepository(city:String) {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch(Dispatchers.IO) {
             var lat:Double = 0.0
             var lon:Double = 0.0
             if (city.equals("Seoul")) {
@@ -38,6 +38,7 @@ class SettingViewModel @Inject constructor(
                     lon = lon
             ))
         }
+
     }
 
 }

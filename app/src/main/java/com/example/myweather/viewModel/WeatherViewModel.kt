@@ -1,10 +1,7 @@
 package com.example.myweather.viewModel
 
 import android.util.Log
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.myweather.BuildConfig
 import com.example.myweather.data.CityRepository
 import com.example.myweather.data.WeatherRepository
@@ -19,9 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
-    private var weatherRepository: WeatherRepository,
-    private val savedStateHandle: SavedStateHandle
-) : ViewModel(), LifecycleObserver {
+    private var weatherRepository: WeatherRepository
+) : ViewModel(){
     private var _MyWeatherCurrent = MutableLiveData<MyWeatherCurrent>()
     var MyWeatherCurrent = _MyWeatherCurrent
 
@@ -31,8 +27,7 @@ class WeatherViewModel @Inject constructor(
     private var units = "metric"
 
     fun requestWeatherRepositories() {
-        CoroutineScope(Dispatchers.IO).launch {
-
+        viewModelScope.launch(Dispatchers.IO) {
             var city = weatherRepository.getCityLocalDataSource().getAll()
             if(city!=null){
                 city_Name = city[0].city_name
