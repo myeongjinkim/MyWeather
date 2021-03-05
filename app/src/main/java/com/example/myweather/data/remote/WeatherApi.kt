@@ -11,7 +11,8 @@ interface WeatherApi {
             @Query("lon") lon: Double,
             @Query("appid") key: String,
             @Query("lang") lang: String,
-            @Query("units") units: String
+            @Query("units") units: String,
+            @Query("exclude") exclude: String
     ): Observable<MyWeather>
 
 }

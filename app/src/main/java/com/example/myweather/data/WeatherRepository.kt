@@ -10,6 +10,6 @@ class WeatherRepository@Inject constructor(
 ) {
 
     fun getCityLocalDataSource()= cityDao
-    fun getWeatherRemoteDataSource(lat:Double, lon:Double, myKey:String, lang:String, units:String) = weatherApi.getWeather(lat, lon, myKey, lang, units)
+    fun getWeatherRemoteDataSource(lat:Double, lon:Double, myKey:String, lang:String, units:String, exclude:String) = weatherApi.getWeather(lat, lon, myKey, lang, units, exclude)
 
 }

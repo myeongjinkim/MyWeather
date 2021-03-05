@@ -25,13 +25,14 @@ class WeatherViewModel @Inject constructor(
     private val myKey= BuildConfig.OpenWeatherKey //openweather api key
     private var lang = "kr"
     private var units = "metric"
+    private var exclude = "minutely,alerts"
 
     fun requestWeatherRepositories() {
         viewModelScope.launch(Dispatchers.IO) {
             var city = weatherRepository.getCityLocalDataSource().getAll()
             if(city!=null){
                 city_Name = city[0].city_name
-                weatherRepository.getWeatherRemoteDataSource(city[0].lat, city[0].lon, myKey, lang, units)
+                weatherRepository.getWeatherRemoteDataSource(city[0].lat, city[0].lon, myKey, lang, units, exclude)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
