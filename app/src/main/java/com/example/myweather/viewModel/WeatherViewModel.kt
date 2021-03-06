@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.example.myweather.BuildConfig
 import com.example.myweather.data.CityRepository
 import com.example.myweather.data.WeatherRepository
+import com.example.myweather.data.remote.MyWeather
 import com.example.myweather.data.remote.MyWeatherCurrent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,8 +19,8 @@ import javax.inject.Inject
 class WeatherViewModel @Inject constructor(
     private var weatherRepository: WeatherRepository
 ) : ViewModel(){
-    private var _MyWeatherCurrent = MutableLiveData<MyWeatherCurrent>()
-    var MyWeatherCurrent = _MyWeatherCurrent
+    private var _MyWeather = MutableLiveData<MyWeather>()
+    var MyWeather = _MyWeather
 
     private lateinit var city_Name:String
     private val myKey= BuildConfig.OpenWeatherKey //openweather api key
@@ -37,7 +38,7 @@ class WeatherViewModel @Inject constructor(
                     .subscribe(
                             { result ->
                                 Log.d("vm Msg:", "gdgd")
-                                _MyWeatherCurrent.postValue(result.current)
+                                _MyWeather.postValue(result)
                             },
                             { error -> Log.d("Error Msg????:", error.message.toString()) }
                     )
