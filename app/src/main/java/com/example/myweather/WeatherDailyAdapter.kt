@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myweather.data.remote.MyWeatherDaily
 import com.squareup.picasso.Picasso
+import java.util.*
 
 class WeatherDailyAdapter(private val dataSet: List<MyWeatherDaily>) : RecyclerView.Adapter<WeatherDailyAdapter.ViewHolder>() {
 
@@ -36,8 +37,9 @@ class WeatherDailyAdapter(private val dataSet: List<MyWeatherDaily>) : RecyclerV
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
-        viewHolder.textView1.text = dataSet[position].dt.toString()
+        val cal = Calendar.getInstance()
+        cal.time = Date(dataSet[position].dt * 1000L)
+        viewHolder.textView1.text = "${cal.get(Calendar.DATE)}일"
         var icon = "https://openweathermap.org/img/wn/${dataSet[position].weather[0].icon}@2x.png"
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
         viewHolder.textView2.text = dataSet[position].weather[0].description
