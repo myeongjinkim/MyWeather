@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myweather.data.remote.MyWeatherCurrent
 import com.example.myweather.databinding.ActivityMainBinding
 import com.example.myweather.viewModel.WeatherViewModel
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar);
 
         initWeatherViewModel()
-
+        initRecyclerView()
     }
 
     override fun onStart() {
@@ -69,12 +70,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initRecyclerView(){
+        var list = Array<String>(5,{"0"})
+        for (i in 0..4) {
+            list.set(i,"TEXT ${i}")
+        }
+        binding.recyclerHourView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        val weatherHourAdapter = WeatherHourAdapter(list)
+        binding.recyclerHourView.setAdapter(weatherHourAdapter)
+
+        binding.recyclerDayView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        val weatherDayAdapter = WeatherDayAdapter(list)
+        binding.recyclerDayView.setAdapter(weatherDayAdapter)
+    }
+
     private fun updateRepository(repos: MyWeatherCurrent) {
+
+        binding.textView1.setText("도시 : ${weatherViewModel.getCity_name()}")
         var icon = "https://openweathermap.org/img/wn/${repos.weather.get(0).icon}@2x.png"
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(binding.imageView);
-        binding.textView1.setText("도시 : ${weatherViewModel.getCity_name()}")
-        binding.textView2.setText("날씨 : ${repos.weather.get(0)?.description}")
-        binding.textView3.setText("온도 : ${repos.temp}")
+        binding.textView2.setText("온도 : ${repos.temp}")
+        binding.textView3.setText("날씨 : ${repos.weather.get(0)?.description}")
         binding.textView4.setText("체감 온도 : ${repos.feels_like}")
     }
 
