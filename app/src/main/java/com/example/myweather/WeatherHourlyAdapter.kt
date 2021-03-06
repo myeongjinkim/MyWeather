@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class WeatherDayAdapter(private val dataSet: Array<String>) : RecyclerView.Adapter<WeatherDayAdapter.ViewHolder>() {
+class WeatherHourlyAdapter(private val dataSet: Array<String>) : RecyclerView.Adapter<WeatherHourlyAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView1: TextView
@@ -19,7 +19,7 @@ class WeatherDayAdapter(private val dataSet: Array<String>) : RecyclerView.Adapt
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
 
         val view = LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.recyclerview_dayitem, viewGroup, false)
+                .inflate(R.layout.recyclerview_hourlyitem, viewGroup, false)
 
         return ViewHolder(view)
     }

@@ -75,23 +75,23 @@ class MainActivity : AppCompatActivity() {
         for (i in 0..4) {
             list.set(i,"TEXT ${i}")
         }
-        binding.recyclerHourView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
-        val weatherHourAdapter = WeatherHourAdapter(list)
-        binding.recyclerHourView.setAdapter(weatherHourAdapter)
+        binding.recyclerHourlyView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        val weatherHourAdapter = WeatherHourlyAdapter(list)
+        binding.recyclerHourlyView.setAdapter(weatherHourAdapter)
 
-        binding.recyclerDayView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
-        val weatherDayAdapter = WeatherDayAdapter(list)
-        binding.recyclerDayView.setAdapter(weatherDayAdapter)
+        binding.recyclerDailyView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        val weatherDailyAdapter = WeatherDailyAdapter(list)
+        binding.recyclerDailyView.setAdapter(weatherDailyAdapter)
     }
 
     private fun updateRepository(repos: MyWeatherCurrent) {
 
         binding.textView1.setText("도시 : ${weatherViewModel.getCity_name()}")
-        var icon = "https://openweathermap.org/img/wn/${repos.weather.get(0).icon}@2x.png"
+        var icon = "https://openweathermap.org/img/wn/${repos.weather[0].icon}@2x.png"
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(binding.imageView);
-        binding.textView2.setText("온도 : ${repos.temp}")
-        binding.textView3.setText("날씨 : ${repos.weather.get(0)?.description}")
-        binding.textView4.setText("체감 온도 : ${repos.feels_like}")
+        binding.textView2.setText("온도 : ${repos.temp}℃")
+        binding.textView3.setText("날씨 : ${repos.weather[0].description}")
+        binding.textView4.setText("체감 온도 : ${repos.feels_like}℃")
     }
 
 }
