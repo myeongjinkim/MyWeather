@@ -37,16 +37,18 @@ class WeatherHourlyAdapter(private val dataSet: List<MyWeatherHourly>) : Recycle
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val num = position*3
         val cal = Calendar.getInstance()
-        cal.time = Date(dataSet[position].dt * 1000L)
+        cal.time = Date(dataSet[num].dt * 1000L)
         viewHolder.textView1.text = "${cal.get(Calendar.HOUR)}시"
-        var icon = "https://openweathermap.org/img/wn/${dataSet[position].weather[0].icon}@2x.png"
+        var icon = "https://openweathermap.org/img/wn/${dataSet[num].weather[0].icon}@2x.png"
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
-        viewHolder.textView2.text = dataSet[position].weather[0].description
-        viewHolder.textView3.text = "${dataSet[position].pop}%"
-        viewHolder.textView4.text = "${dataSet[position].temp}℃"
+        viewHolder.textView2.text = dataSet[num].weather[0].description
+        viewHolder.textView3.text = "${dataSet[num].pop}%"
+        viewHolder.textView4.text = "${Math.round(dataSet[num].temp)}℃"
+
     }
 
-    override fun getItemCount() = dataSet.size
+    override fun getItemCount() = dataSet.size/3
 
 }

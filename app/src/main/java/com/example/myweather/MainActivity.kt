@@ -9,6 +9,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myweather.data.remote.MyWeather
+import com.example.myweather.data.remote.MyWeatherDaily
+import com.example.myweather.data.remote.MyWeatherHourly
 import com.example.myweather.databinding.ActivityMainBinding
 import com.example.myweather.viewModel.WeatherViewModel
 import com.squareup.picasso.Picasso
@@ -80,9 +82,9 @@ class MainActivity : AppCompatActivity() {
         binding.textView1.setText("${weatherViewModel.getCity_name()}")
         var icon = "https://openweathermap.org/img/wn/${repos.current.weather[0].icon}@2x.png"
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(binding.imageView);
-        binding.textView2.setText("${repos.current.temp}℃")
+        binding.textView2.setText("${Math.round(repos.current.temp)}℃")
         binding.textView3.setText("${repos.current.weather[0].description}")
-        binding.textView4.setText("${repos.daily[0].temp.max}℃/${repos.daily[0].temp.min}℃ 체감 온도 ${repos.current.feels_like}℃")
+        binding.textView4.setText("${Math.round(repos.daily[0].temp.max)}℃/${Math.round(repos.daily[0].temp.min)}℃ 체감 온도 ${Math.round(repos.current.feels_like)}℃")
 
         binding.recyclerHourlyView.adapter = WeatherHourlyAdapter(repos.hourly)
         binding.recyclerDailyView.adapter = WeatherDailyAdapter(repos.daily)
