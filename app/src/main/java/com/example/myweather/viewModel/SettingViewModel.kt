@@ -41,4 +41,8 @@ class SettingViewModel @Inject constructor(
 
     }
 
+    fun onTextChanged(s: CharSequence, start :Int, before : Int, count: Int){
+        // handle
+    }
+
 }

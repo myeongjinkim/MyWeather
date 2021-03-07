@@ -41,4 +41,7 @@ class SettingActivity: AppCompatActivity() {
         settingViewModel.requestSettingRepository((view as Button).text as String)
 
     }
+    fun textClear(view: View){
+        binding.editText.setText("")
+    }
 }
