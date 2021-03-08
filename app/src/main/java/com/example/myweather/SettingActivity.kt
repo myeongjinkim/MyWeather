@@ -1,12 +1,20 @@
 package com.example.myweather
 
-import android.R
+import android.app.Application
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.example.myweather.databinding.ActivitySettingBinding
 import com.example.myweather.viewModel.SettingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,8 +26,8 @@ class SettingActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_setting)
+        binding.viewModel = settingViewModel
         setSupportActionBar(binding.toolbar);
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
@@ -28,7 +36,7 @@ class SettingActivity: AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.home -> {
+            android.R.id.home -> {
                 onBackPressed()
                 return true
             }
@@ -44,4 +52,13 @@ class SettingActivity: AppCompatActivity() {
     fun textClear(view: View){
         binding.editText.setText("")
     }
+
+    fun closeKeyboard(view: View) {
+        if(view != null) {
+            view.clearFocus()
+            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
 }

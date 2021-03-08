@@ -37,10 +37,9 @@ class WeatherViewModel @Inject constructor(
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { result ->
-                                Log.d("vm Msg:", "gdgd")
                                 _MyWeather.postValue(result)
                             },
-                            { error -> Log.d("Error Msg????:", error.message.toString()) }
+                            { error -> Log.d("Error Msg:", error.message.toString()) }
                     )
         }
     }
