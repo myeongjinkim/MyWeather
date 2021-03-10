@@ -43,7 +43,7 @@ class WeatherDailyAdapter(private val dataSet: List<MyWeatherDaily>) : RecyclerV
         var icon = "https://openweathermap.org/img/wn/${dataSet[position].weather[0].icon}@2x.png"
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
         viewHolder.textView2.text = dataSet[position].weather[0].description
-        viewHolder.textView3.text = "${dataSet[position].pop}%"
+        viewHolder.textView3.text = "${Math.round(dataSet[position].pop)}%"
         viewHolder.textView4.text = "${Math.round(dataSet[position].temp.max)}℃/${Math.round(dataSet[position].temp.min)}℃"
     }
 
