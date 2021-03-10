@@ -68,10 +68,8 @@ class SettingViewModel @Inject constructor(
     }
 
     fun closeKeyboard(view: View) {
-        if(view != null) {
-            view.clearFocus()
-            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-        }
+        view.clearFocus()
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     fun textClear(view: View){

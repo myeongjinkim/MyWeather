@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myweather.data.remote.MyWeather
 import com.example.myweather.data.remote.MyWeatherDaily
@@ -26,13 +27,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.viewModel = weatherViewModel
         setSupportActionBar(binding.toolbar);
 
         initWeatherViewModel()
-        initRecyclerView()
     }
 
     override fun onStart() {
@@ -44,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.setting_menu, menu)
         return true
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -72,20 +70,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initRecyclerView(){
-        binding.hourlyRecyclerView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
-        binding.dailyRecyclerView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
-    }
-
     private fun updateView(repos: MyWeather) {
-
-        binding.textView1.setText("${weatherViewModel.getCity_name()}")
-        var icon = "https://openweathermap.org/img/wn/${repos.current.weather[0].icon}@2x.png"
-        Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(binding.imageView);
-        binding.textView2.setText("${Math.round(repos.current.temp)}℃")
-        binding.textView3.setText("${repos.current.weather[0].description}")
-        binding.textView4.setText("${Math.round(repos.daily[0].temp.max)}℃/${Math.round(repos.daily[0].temp.min)}℃ 체감 온도 ${Math.round(repos.current.feels_like)}℃")
-
         binding.hourlyRecyclerView.adapter = WeatherHourlyAdapter(repos.hourly)
         binding.dailyRecyclerView.adapter = WeatherDailyAdapter(repos.daily)
     }
