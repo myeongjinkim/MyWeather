@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerHourlyView" />
+        app:layout_constraintBottom_toTopOf="@+id/hourlyRecyclerView" />
 
     <TextView
         android:id="@+id/textView3"
@@ -70,16 +70,16 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerHourlyView"
+        android:id="@+id/hourlyRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerDailyView"/>
+        app:layout_constraintBottom_toTopOf="@+id/dailyRecyclerView"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDailyView"
+        android:id="@+id/dailyRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/black"

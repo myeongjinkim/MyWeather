@@ -1,22 +1,19 @@
 package com.example.myweather
 
-import android.app.Application
 import android.content.Context
+import android.location.Address
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.myweather.databinding.ActivitySettingBinding
 import com.example.myweather.viewModel.SettingViewModel
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,11 +41,6 @@ class SettingActivity: AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
-    fun myWeather(view: View) {
-        settingViewModel.requestSettingRepository((view as Button).text as String)
-
-    }
     fun textClear(view: View){
         binding.editText.setText("")
     }
@@ -59,6 +51,11 @@ class SettingActivity: AppCompatActivity() {
             val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
+    }
+
+    fun setCity(view: View){
+        settingViewModel.requestSettingRepository()
+        onBackPressed()
     }
 
 }

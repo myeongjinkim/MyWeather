@@ -62,22 +62,22 @@ class MainActivity : AppCompatActivity() {
             pressedTime = System.currentTimeMillis()
             Toast.makeText(this, " 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
         }else{
-            finish();
+            finish()
         }
     }
 
     private fun initWeatherViewModel() {
         weatherViewModel.MyWeather.observe(this) {
-            updateRepository(it)
+            updateView(it)
         }
     }
 
     private fun initRecyclerView(){
-        binding.recyclerHourlyView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
-        binding.recyclerDailyView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        binding.hourlyRecyclerView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        binding.dailyRecyclerView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
     }
 
-    private fun updateRepository(repos: MyWeather) {
+    private fun updateView(repos: MyWeather) {
 
         binding.textView1.setText("${weatherViewModel.getCity_name()}")
         var icon = "https://openweathermap.org/img/wn/${repos.current.weather[0].icon}@2x.png"
@@ -86,8 +86,8 @@ class MainActivity : AppCompatActivity() {
         binding.textView3.setText("${repos.current.weather[0].description}")
         binding.textView4.setText("${Math.round(repos.daily[0].temp.max)}℃/${Math.round(repos.daily[0].temp.min)}℃ 체감 온도 ${Math.round(repos.current.feels_like)}℃")
 
-        binding.recyclerHourlyView.adapter = WeatherHourlyAdapter(repos.hourly)
-        binding.recyclerDailyView.adapter = WeatherDailyAdapter(repos.daily)
+        binding.hourlyRecyclerView.adapter = WeatherHourlyAdapter(repos.hourly)
+        binding.dailyRecyclerView.adapter = WeatherDailyAdapter(repos.daily)
     }
 
 }
