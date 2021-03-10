@@ -29,6 +29,7 @@ class SettingActivity: AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
 
+        initSettingViewModel()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -41,21 +42,10 @@ class SettingActivity: AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun textClear(view: View){
-        binding.editText.setText("")
-    }
-
-    fun closeKeyboard(view: View) {
-        if(view != null) {
-            view.clearFocus()
-            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    private fun initSettingViewModel() {
+        settingViewModel.BackPressed.observe(this) {
+            finish()
         }
-    }
-
-    fun setCity(view: View){
-        settingViewModel.requestSettingRepository()
-        onBackPressed()
     }
 
 }

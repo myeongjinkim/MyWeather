@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/settingLayout"
-        android:onClick="closeKeyboard">
+        android:onClick="@{viewModel.closeKeyboard}">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -29,6 +29,7 @@
             android:drawableLeft="@drawable/ic_baseline_search_24"
             android:hint="주소를 입력해주세요"
             android:textColorHint="@color/gray"
+            android:text="@{viewModel.editCityAddress}"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLength="15"
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
             android:background="@android:color/transparent"
-            android:onClick="textClear"
+            android:onClick="@{viewModel.textClear}"
             android:src="@drawable/ic_baseline_clear_24"
             app:layout_constraintTop_toTopOf="@+id/editText"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.cityAddress}"
-            android:onClick="setCity"
+            android:onClick="@{viewModel.setCity}"
             android:layout_marginTop="10dp"
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
