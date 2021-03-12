@@ -67,8 +67,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initWeatherViewModel() {
-        weatherViewModel.MyWeatherProgress.observe(this) {
-            myProgressBar.dismiss();
+        weatherViewModel.MyWeather.observe(this) {
+            myProgressBar.dismiss()
+            binding.weather = it
             setContentView(binding.root)
         }
     }
