@@ -2,11 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context=".presentation.weather.MainActivity">
     <data>
         <variable
             name="viewModel"
-            type="com.example.myweather.viewModel.WeatherViewModel" />
+            type="com.example.myweather.presentation.weather.WeatherViewModel" />
 
         <variable
             name="weather"

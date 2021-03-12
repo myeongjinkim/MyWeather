@@ -1,21 +1,11 @@
-package com.example.myweather
+package com.example.myweather.presentation.setting
 
-import android.content.Context
-import android.location.Address
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import com.example.myweather.databinding.ActivityMainBinding
-import com.example.myweather.databinding.ActivityMainBinding.inflate
 import com.example.myweather.databinding.ActivitySettingBinding
-import com.example.myweather.viewModel.SettingViewModel
-import com.squareup.picasso.Picasso
+import com.example.myweather.presentation.setting.SettingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

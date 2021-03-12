@@ -1,10 +1,8 @@
-package com.example.myweather.viewModel
+package com.example.myweather.presentation.setting
 
 import android.app.Application
 import android.content.Context
-import android.location.Address
 import android.location.Geocoder
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -12,12 +10,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myweather.data.CityRepository
 import com.example.myweather.data.local.City
-import com.example.myweather.data.remote.MyWeather
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

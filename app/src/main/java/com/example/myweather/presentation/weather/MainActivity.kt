@@ -1,17 +1,15 @@
-package com.example.myweather
+package com.example.myweather.presentation.weather
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myweather.data.remote.MyWeather
+import com.example.myweather.R
+import com.example.myweather.presentation.setting.SettingActivity
 import com.example.myweather.databinding.ActivityMainBinding
-import com.example.myweather.viewModel.WeatherViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

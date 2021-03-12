@@ -1,8 +1,5 @@
 package com.example.myweather.data.remote
 
-import android.content.Context
-import androidx.room.Room
-import com.example.myweather.data.local.CityDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

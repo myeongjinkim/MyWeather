@@ -1,10 +1,11 @@
-package com.example.myweather
+package com.example.myweather.presentation.weather
 
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Window
+import com.example.myweather.R
 
 
 class MyProgressBar(context: Context) : Dialog(context) {

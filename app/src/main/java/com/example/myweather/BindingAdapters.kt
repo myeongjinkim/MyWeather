@@ -8,6 +8,8 @@ import com.example.myweather.data.remote.MyWeather
 import com.example.myweather.data.remote.MyWeatherDaily
 import com.example.myweather.data.remote.MyWeatherDailyTemp
 import com.example.myweather.data.remote.MyWeatherHourly
+import com.example.myweather.presentation.weather.WeatherDailyAdapter
+import com.example.myweather.presentation.weather.WeatherHourlyAdapter
 import com.squareup.picasso.Picasso
 import java.util.*
 
@@ -32,7 +34,7 @@ object BindingAdapters {
     @BindingAdapter("iconData")
     fun bindingIconitem(imageView: ImageView, data: String) {
         var icon = "https://openweathermap.org/img/wn/${data}@2x.png"
-        Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(imageView);
+        Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(imageView)
     }
 
     @JvmStatic

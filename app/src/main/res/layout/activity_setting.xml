@@ -2,11 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SettingActivity">
+    tools:context=".presentation.setting.SettingActivity">
     <data>
         <variable
             name="viewModel"
-            type="com.example.myweather.viewModel.SettingViewModel" />
+            type="com.example.myweather.presentation.setting.SettingViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
