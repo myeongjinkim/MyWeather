@@ -11,6 +11,8 @@ import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.myweather.databinding.ActivityMainBinding
+import com.example.myweather.databinding.ActivityMainBinding.inflate
 import com.example.myweather.databinding.ActivitySettingBinding
 import com.example.myweather.viewModel.SettingViewModel
 import com.squareup.picasso.Picasso
@@ -23,13 +25,16 @@ class SettingActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_setting)
+        binding = ActivitySettingBinding.inflate(layoutInflater)
+
         binding.viewModel = settingViewModel
         setSupportActionBar(binding.toolbar);
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
 
         initSettingViewModel()
+
+        setContentView(binding.root)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

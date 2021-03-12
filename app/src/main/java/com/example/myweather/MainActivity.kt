@@ -1,20 +1,17 @@
 package com.example.myweather
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myweather.data.remote.MyWeather
-import com.example.myweather.data.remote.MyWeatherDaily
-import com.example.myweather.data.remote.MyWeatherHourly
 import com.example.myweather.databinding.ActivityMainBinding
 import com.example.myweather.viewModel.WeatherViewModel
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,16 +19,21 @@ class MainActivity : AppCompatActivity() {
     private var pressedTime: Long = 0
     private val finishIntervalTime: Long = 2000
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var myProgressBar: MyProgressBar
     private val weatherViewModel: WeatherViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
         binding.viewModel = weatherViewModel
         setSupportActionBar(binding.toolbar);
 
+        myProgressBar = MyProgressBar(this)
+
         initWeatherViewModel()
+
+
     }
 
     override fun onStart() {
@@ -65,14 +67,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initWeatherViewModel() {
-        weatherViewModel.MyWeather.observe(this) {
-            updateView(it)
+        weatherViewModel.MyWeatherProgress.observe(this) {
+            myProgressBar.dismiss();
+            setContentView(binding.root)
         }
-    }
-
-    private fun updateView(repos: MyWeather) {
-        binding.hourlyRecyclerView.adapter = WeatherHourlyAdapter(repos.hourly)
-        binding.dailyRecyclerView.adapter = WeatherDailyAdapter(repos.daily)
     }
 
 }

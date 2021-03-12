@@ -79,7 +79,9 @@
             android:layout_height="wrap_content"
             android:background="@color/black"
             android:orientation="horizontal"
+            hourlyData="@{viewModel.myWeatherHourly}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/recyclerview_hourlyitem"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/dailyRecyclerView"/>
@@ -90,7 +92,9 @@
             android:layout_height="wrap_content"
             android:background="@color/black"
             android:orientation="horizontal"
+            dailyData="@{viewModel.myWeatherDaily}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/recyclerview_dailyitem"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
