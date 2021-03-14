@@ -10,5 +10,7 @@
     <color name="progress_gray">#22ffffff</color>
     <color name="gray">#AAAAAA</color>
     <color name="darkGray">#646464</color>
+    <color name="blue_light">#660080FF</color>
+    <color name="blue">#AA0080FF</color>
 
 </resources>

@@ -9,8 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginTop="1dp"
+        android:background="@drawable/layout_border"
         android:padding="10dp">
 
         <TextView
@@ -18,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             hourData="@{weatherHourly.dt}"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/imageView" />
@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="@{weatherHourly.weather.get(0).description}"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/textView3" />
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             roundPopData="@{weatherHourly.pop}"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/textView4" />
@@ -58,6 +60,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             roundTempData="@{weatherHourly.temp}"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />

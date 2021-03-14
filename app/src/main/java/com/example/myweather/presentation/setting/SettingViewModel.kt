@@ -3,7 +3,6 @@ package com.example.myweather.presentation.setting
 import android.app.Application
 import android.content.Context
 import android.location.Geocoder
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -44,7 +43,7 @@ class SettingViewModel @Inject constructor(
 
     }
 
-    fun onEditorAction(view: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+    fun onEditorAction(view: TextView?, actionId: Int): Boolean {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             var text = view!!.text.toString()
             closeKeyboard(view)
@@ -68,11 +67,11 @@ class SettingViewModel @Inject constructor(
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    fun textClear(view: View){
+    fun textClear() {
         editCityAddress.set("")
     }
 
-    fun setCity(view: View){
+    fun setCity() {
         requestSettingRepository()
         _BackPressed.postValue(true)
     }
