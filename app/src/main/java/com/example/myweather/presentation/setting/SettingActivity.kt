@@ -39,7 +39,7 @@ class SettingActivity: AppCompatActivity() {
 
     private fun initSettingViewModel() {
         settingViewModel.BackPressed.observe(this) {
-            finish()
+            onBackPressed()
         }
     }
 

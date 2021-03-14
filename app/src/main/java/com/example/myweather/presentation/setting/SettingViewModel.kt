@@ -50,7 +50,7 @@ class SettingViewModel @Inject constructor(
             var geocoder = Geocoder(context)
 
             try {
-                var address = geocoder.getFromLocationName(text, 100).get(0)
+                var address = geocoder.getFromLocationName(text, 1).get(0)
                 cityAddress.set(address.getAddressLine(0))
                 myCity = City(address.getAddressLine(0),address.latitude,address.longitude)
             } catch (e: IOException) {

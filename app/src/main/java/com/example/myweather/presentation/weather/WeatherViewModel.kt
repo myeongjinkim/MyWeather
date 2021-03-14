@@ -30,17 +30,22 @@ class WeatherViewModel @Inject constructor(
     fun requestWeatherRepositories() {
         viewModelScope.launch(Dispatchers.IO) {
             var city = weatherRepository.getCityLocalDataSource().getAll()
-            cityName.set(city[0].city_name)
+            if(city.isNotEmpty()){
+                cityName.set(city[0].city_name)
+                weatherRepository.getWeatherRemoteDataSource(city[0].lat, city[0].lon, myKey, lang, units, exclude)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                { result ->
+                                    _MyWeather.postValue(result)
+                                },
+                                { error -> Log.d("Error Msg:", error.message.toString()) }
+                        )
+            }else{
+                _MyWeather.postValue(null)
+            }
 
-            weatherRepository.getWeatherRemoteDataSource(city[0].lat, city[0].lon, myKey, lang, units, exclude)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        { result ->
-                            _MyWeather.postValue(result)
-                        },
-                        { error -> Log.d("Error Msg:", error.message.toString()) }
-                    )
+
         }
     }
 }

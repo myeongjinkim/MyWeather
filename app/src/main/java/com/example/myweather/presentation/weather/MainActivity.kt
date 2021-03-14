@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = weatherViewModel
         setSupportActionBar(binding.toolbar);
 
-        myProgressBar = MyProgressBar(this)
-
         initWeatherViewModel()
 
 
@@ -36,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        myProgressBar = MyProgressBar(this)
         weatherViewModel.requestWeatherRepositories()
     }
 
@@ -67,8 +66,13 @@ class MainActivity : AppCompatActivity() {
     private fun initWeatherViewModel() {
         weatherViewModel.MyWeather.observe(this) {
             myProgressBar.dismiss()
-            binding.weather = it
-            setContentView(binding.root)
+            if(it!=null){
+                binding.weather = it
+                setContentView(binding.root)
+            }else{
+                val intent = Intent(applicationContext, SettingActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
