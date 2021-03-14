@@ -1,5 +1,6 @@
 # VideoBlur  
 openweathermap api를 활용한 날씨 어플  
+
 # 개발 환경
 
 Android Gradle Plugin Version : 4.1.1
@@ -42,7 +43,12 @@ targetSdkVersion : 30
 
 * hilt를 사용하여 종속 항목 삽입
 
-# 어플 화면
+# 사용법
+
+local.properties에 openweathermap에서 받은 개인 api 키를 작성  
+ex) OpenWeatherKey = "..."
+
+# 어플 화면 스트린샷
 
 * 정보가 불러올 시, 로딩 화면  
 <img src="https://user-images.githubusercontent.com/11714725/111074195-3c7c5f00-8525-11eb-98a1-f17b1de06f38.png" width="200"/>
