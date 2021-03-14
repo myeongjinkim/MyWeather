@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         initWeatherViewModel()
 
-
     }
 
     override fun onStart() {

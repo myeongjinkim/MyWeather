@@ -67,14 +67,13 @@ class SettingViewModel @Inject constructor(
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    fun textClear() {
+    fun textClear(view: View) {
         editCityAddress.set("")
     }
 
-    fun setCity() {
+    fun setCity(view: View) {
         requestSettingRepository()
         _BackPressed.postValue(true)
     }
-
-
+    
 }
