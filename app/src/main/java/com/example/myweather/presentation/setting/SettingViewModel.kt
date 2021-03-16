@@ -7,6 +7,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -53,8 +54,8 @@ class SettingViewModel @Inject constructor(
                 var address = geocoder.getFromLocationName(text, 1).get(0)
                 cityAddress.set(address.getAddressLine(0))
                 myCity = City(address.getAddressLine(0),address.latitude,address.longitude)
-            } catch (e: IOException) {
-                e.printStackTrace()
+            } catch (e: Exception) {
+                Toast.makeText(context, " 주소를 정확히 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
 
             return true
