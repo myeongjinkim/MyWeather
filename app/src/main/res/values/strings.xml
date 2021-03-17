@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">MyWeather</string>
     <string name="weather_setting">Setting</string>
+
+    <string name="icon_string">https://openweathermap.org/img/wn/%1$s@2x.png</string>
+    <string name="hour_string">%1$s시</string>
+    <string name="temp_string">%1$s℃</string>
+    <string name="percent_string">%1$s%%</string>
+    <string name="temp_daily_string">%1$s℃/%2$s℃</string>
+    <string name="temp_current_string">%1$s℃/%2$s℃ 체감 온도 %3$s℃</string>
+
 </resources>

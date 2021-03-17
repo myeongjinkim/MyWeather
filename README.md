@@ -37,11 +37,11 @@ targetSdkVersion : 30
 
 * Room을 이용해 데이터 베이스 사용
 
-* Coroutine을 사용하여 room 비동기화 처리
+* Coroutine을 사용하여 Room 비동기화 처리
 
 * Data Binding, BindingAdapter을 사용해 mvvm + repository 구현
 
-* hilt를 사용하여 종속 항목 삽입
+* Hilt를 사용하여 종속 항목 삽입
 
 # 사용법
 

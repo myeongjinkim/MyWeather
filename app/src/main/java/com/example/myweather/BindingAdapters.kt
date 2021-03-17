@@ -1,5 +1,6 @@
 package com.example.myweather
 
+import android.content.res.Resources
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -31,36 +32,24 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("iconData")
-    fun bindingIconitem(imageView: ImageView, data: String) {
-        var icon = "https://openweathermap.org/img/wn/${data}@2x.png"
+    @BindingAdapter("iconData", "resource")
+    fun bindingIconitem(imageView: ImageView, data: String, resource: String) {
+        var icon = String.format(resource, data)
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(imageView)
     }
 
     @JvmStatic
-    @BindingAdapter("roundTotTempData")
-    fun bindingRoundTotTempitem(textView: TextView, data: MyWeather) {
-        textView.text = "${Math.round(data.daily[0].temp.max)}℃/${Math.round(data.daily[0].temp.min)}℃ 체감 온도 ${Math.round(data.current.feels_like)}℃"
-    }
-
-    @JvmStatic
-    @BindingAdapter("hourData")
-    fun bindingHouritem(textView: TextView, data: Int) {
+    @BindingAdapter("hourData", "resource")
+    fun bindingHouritem(textView: TextView, data: Int, resource: String) {
         val cal = Calendar.getInstance()
         cal.time = Date(data * 1000L)
-        textView.text = "${cal.get(Calendar.HOUR)}시"
+        textView.text = String.format(resource, cal.get(Calendar.HOUR).toString())
     }
 
     @JvmStatic
-    @BindingAdapter("roundPopData")
-    fun bindingRoundPopitem(textView: TextView, data: Double) {
-        textView.text = "${Math.round(data)}%"
-    }
-
-    @JvmStatic
-    @BindingAdapter("roundTempData")
-    fun bindingRoundTempitem(textView: TextView, data: Double) {
-        textView.text = "${Math.round(data)}℃"
+    @BindingAdapter("roundData", "resource")
+    fun bindingRounditem(textView: TextView, data: Double, resource: String) {
+        textView.text = String.format(resource, round(data))
     }
 
     @JvmStatic
@@ -68,13 +57,22 @@ object BindingAdapters {
     fun bindingDayitem(textView: TextView, data: Int) {
         val cal = Calendar.getInstance()
         cal.time = Date(data * 1000L)
-        textView.text = "${week[cal.get(Calendar.DAY_OF_WEEK)-1]}"
+        textView.text = week[cal.get(Calendar.DAY_OF_WEEK)-1]
     }
 
     @JvmStatic
-    @BindingAdapter("roundDailyTempData")
-    fun bindingRoundDailyTempitem(textView: TextView, data: MyWeatherDailyTemp) {
-        textView.text = "${Math.round(data.max)}℃/${Math.round(data.min)}℃"
+    @BindingAdapter("roundTotTempData", "resource")
+    fun bindingRoundTotTempitem(textView: TextView, data: MyWeather, resource: String) {
+        textView.text = String.format(resource, round(data.daily[0].temp.max), round(data.daily[0].temp.min), round(data.current.feels_like))
     }
 
+    @JvmStatic
+    @BindingAdapter("roundDailyTempData", "resource")
+    fun bindingRoundDailyTempitem(textView: TextView, data: MyWeatherDailyTemp, resource: String) {
+        textView.text = String.format(resource, round(data.max),round(data.min))
+    }
+
+    fun round(data: Double):String{
+        return Math.round(data).toString()
+    }
 }
