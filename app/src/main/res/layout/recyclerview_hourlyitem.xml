@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             hourData="@{weatherHourly.dt}"
             resource="@{@string/hour_string}"
+            arrayResource="@{@stringArray/day}"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

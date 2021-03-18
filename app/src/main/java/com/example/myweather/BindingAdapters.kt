@@ -16,9 +16,6 @@ import java.util.*
 
 object BindingAdapters {
 
-    val week = arrayOf("일", "월", "화", "수", "목", "금", "토")
-    val day = arrayOf("오전", "오후")
-
     @JvmStatic
     @BindingAdapter("RecyclerHourlyData")
     fun bindingHourlyitem(recyclerView: RecyclerView, data: List<MyWeatherHourly>) {
@@ -40,14 +37,14 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("hourData", "resource")
-    fun bindingHouritem(textView: TextView, data: Int, resource: String) {
+    @BindingAdapter("hourData", "resource", "arrayResource")
+    fun bindingHouritem(textView: TextView, data: Int, resource: String, arrayResource: Array<String>) {
         val cal = Calendar.getInstance()
         cal.time = Date(data * 1000L)
         val ampm = if(cal.get(Calendar.AM_PM) == Calendar.AM) {
-            day[0]
+            arrayResource[0]
         }else{
-            day[1]
+            arrayResource[1]
         }
         textView.text = String.format(resource, ampm, cal.get(Calendar.HOUR).toString())
     }
@@ -59,11 +56,11 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("dayData")
-    fun bindingDayitem(textView: TextView, data: Int) {
+    @BindingAdapter("dayData", "arrayResource")
+    fun bindingDayitem(textView: TextView, data: Int, arrayResource: Array<String>) {
         val cal = Calendar.getInstance()
         cal.time = Date(data * 1000L)
-        textView.text = week[cal.get(Calendar.DAY_OF_WEEK)-1]
+        textView.text = arrayResource[cal.get(Calendar.DAY_OF_WEEK)-1]
     }
 
     @JvmStatic
