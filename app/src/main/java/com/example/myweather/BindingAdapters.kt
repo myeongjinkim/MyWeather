@@ -17,6 +17,7 @@ import java.util.*
 object BindingAdapters {
 
     val week = arrayOf("일", "월", "화", "수", "목", "금", "토")
+    val day = arrayOf("오전", "오후")
 
     @JvmStatic
     @BindingAdapter("RecyclerHourlyData")
@@ -43,7 +44,12 @@ object BindingAdapters {
     fun bindingHouritem(textView: TextView, data: Int, resource: String) {
         val cal = Calendar.getInstance()
         cal.time = Date(data * 1000L)
-        textView.text = String.format(resource, cal.get(Calendar.HOUR).toString())
+        val ampm = if(cal.get(Calendar.AM_PM) == Calendar.AM) {
+            day[0]
+        }else{
+            day[1]
+        }
+        textView.text = String.format(resource, ampm, cal.get(Calendar.HOUR).toString())
     }
 
     @JvmStatic
