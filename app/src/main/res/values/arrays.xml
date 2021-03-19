@@ -14,4 +14,10 @@
         <item>오후</item>
     </string-array>
 
+    <string-array name="date">
+        <item>오늘</item>
+        <item>내일</item>
+        <item>모래</item>
+    </string-array>
+
 </resources>

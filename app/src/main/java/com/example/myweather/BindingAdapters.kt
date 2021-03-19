@@ -12,6 +12,7 @@ import com.example.myweather.data.remote.MyWeatherHourly
 import com.example.myweather.presentation.weather.WeatherDailyAdapter
 import com.example.myweather.presentation.weather.WeatherHourlyAdapter
 import com.squareup.picasso.Picasso
+import java.time.LocalDate
 import java.util.*
 
 object BindingAdapters {
@@ -34,6 +35,23 @@ object BindingAdapters {
     fun bindingIconitem(imageView: ImageView, data: String, resource: String) {
         var icon = String.format(resource, data)
         Picasso.get().load(icon).error(R.drawable.ic_launcher_background).into(imageView)
+    }
+
+    @JvmStatic
+    @BindingAdapter("dateData", "arrayResource")
+    fun bindingDateitem(textView: TextView, data: Int, arrayResource: Array<String>) {
+        val cal = Calendar.getInstance()
+        cal.time = Date(data * 1000L)
+        val current = Calendar.getInstance()
+        val currentDate = current.get(Calendar.DATE)
+        val date = if(cal.get(Calendar.DATE) == currentDate) {
+            arrayResource[0]
+        }else if(cal.get(Calendar.DATE) == currentDate+1){
+            arrayResource[1]
+        }else{
+            arrayResource[2]
+        }
+        textView.text = date
     }
 
     @JvmStatic
