@@ -1,6 +1,7 @@
 package com.example.myweather
 
 import android.content.res.Resources
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -71,6 +72,12 @@ object BindingAdapters {
     @BindingAdapter("roundData", "resource")
     fun bindingRounditem(textView: TextView, data: Double, resource: String) {
         textView.text = String.format(resource, round(data))
+    }
+
+    @JvmStatic
+    @BindingAdapter("percentData", "resource")
+    fun bindingPercentRounditem(textView: TextView, data: Double, resource: String) {
+        textView.text = String.format(resource, round(data*100))
     }
 
     @JvmStatic

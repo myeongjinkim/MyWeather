@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            roundData="@{weatherDaily.pop}"
+            percentData="@{weatherDaily.pop}"
             resource="@{@string/percent_string}"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"

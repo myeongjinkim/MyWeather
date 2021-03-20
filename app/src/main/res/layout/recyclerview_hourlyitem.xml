@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            roundData="@{weatherHourly.pop}"
+            percentData="@{weatherHourly.pop}"
             resource="@{@string/percent_string}"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
